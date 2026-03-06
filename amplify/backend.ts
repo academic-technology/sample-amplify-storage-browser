@@ -19,7 +19,6 @@ backend.addOutput({
         name: customBucketName,
         bucket_name: customBucketName,
         aws_region: customBucketRegion,
-        //@ts-expect-error amplify backend type issue
         paths: {
           "*": {
             authenticated: ["get", "list", "write", "delete"],
@@ -28,10 +27,6 @@ backend.addOutput({
       },
     ],
   },
-});
-
-const unauthPolicy = new Policy(backend.stack, "customBucketUnauthPolicy", {
-  statements: [],
 });
 
 const authPolicy = new Policy(backend.stack, "customBucketAuthPolicy", {
@@ -50,4 +45,3 @@ const authPolicy = new Policy(backend.stack, "customBucketAuthPolicy", {
 });
 
 backend.auth.resources.authenticatedUserIamRole.attachInlinePolicy(authPolicy);
-backend.auth.resources.groups["admin"].role.attachInlinePolicy(adminPolicy);
