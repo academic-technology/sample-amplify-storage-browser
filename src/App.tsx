@@ -12,6 +12,12 @@ Amplify.configure(config);
 
 const { StorageBrowser } = createStorageBrowser({
   config: createAmplifyAuthAdapter(),
+  buckets: [
+    {
+      name: "s3-t-uw2-aws-amplify-s3-storage-browser",
+      region: "us-west-2",
+    }
+  ]
 });
 
 function App() {
