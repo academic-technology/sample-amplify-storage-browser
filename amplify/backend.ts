@@ -69,5 +69,4 @@ backend.auth.resources.unauthenticatedUserIamRole.attachInlinePolicy(
 );
 
 backend.auth.resources.authenticatedUserIamRole.attachInlinePolicy(authPolicy);
-
 backend.auth.resources.groups["admin"].role.attachInlinePolicy(adminPolicy);
