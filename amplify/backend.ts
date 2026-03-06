@@ -49,24 +49,5 @@ const authPolicy = new Policy(backend.stack, "customBucketAuthPolicy", {
   ],
 });
 
-const adminPolicy = new Policy(backend.stack, "customBucketAdminPolicy", {
-  statements: [
-    new PolicyStatement({
-      effect: Effect.ALLOW,
-      actions: ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
-      resources: [`arn:aws:s3:::${customBucketName}/*`],
-    }),
-    new PolicyStatement({
-      effect: Effect.ALLOW,
-      actions: ["s3:ListBucket"],
-      resources: [`arn:aws:s3:::${customBucketName}`],
-    }),
-  ],
-});
-
-backend.auth.resources.unauthenticatedUserIamRole.attachInlinePolicy(
-  unauthPolicy
-);
-
 backend.auth.resources.authenticatedUserIamRole.attachInlinePolicy(authPolicy);
 backend.auth.resources.groups["admin"].role.attachInlinePolicy(adminPolicy);
